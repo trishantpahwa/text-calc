@@ -1,0 +1,72 @@
+<hr />
+<h2 id="name-text-calc">Name: Text-Calc</h2>
+<h1 id="text-calc">Text-Calc</h1>
+<p>Text-Calc is a program that is built upon JavaScript, using the Node.JS runtime. It is used to mimic the behavior of an interpreter.</p>
+<p>It takes arithmetic expressions as an input and evaluates them to provide the values of each variable that declared in the expressions provided.</p>
+<p>It supports 2 fashions of taking input for the arithmetic expressions to produce a result, namely</p>
+<ul>
+<li>Command Line Interface(CLI)<br /></li>
+<li>Text File containing the input expressions.</li>
+</ul>
+<h2 id="structure-of-program">Structure of program</h2>
+<p>Text-Calc mainly highly emphasizes on OOPs concepts of using classes and objects, and their almost all of the functionalities, to acheive it's aim.</p>
+<h3 id="files">Files</h3>
+<ol>
+<li><p>Inbuilt</p>
+<ol>
+<li>package.json: This file defines the details about a program that is built in Node.JS. It stores various information about the project, such as it's name, version, description, scripts to execute, test, or deploy it, author's name, license, dependencies, etc.<br /></li>
+</ol></li>
+<li><p>Demo</p>
+<ol>
+<li>calculate.txt: This file is a sample input for a file that the program would be using as an input to evaluate it and produce an output.<br /></li>
+</ol></li>
+<li><p>Entry point</p>
+<ol>
+<li>index.js: This file is the entry point of the program. It is launched from here. In this file it checks whether the user has provided a file as an arguemnt or not. If the user did, it would evaluate the files that the user has passed as argument while running the program. Or else, it starts a Command Line Interface to receive the input arithemtic expressions by prompting the user for each expression, until an expty string is passed to it, to show the output. Another function of this file is to check the input syntax of the expressions that are provided to it, it does this by using matching regex strings.<br /></li>
+</ol></li>
+<li><p>classes</p>
+<ol>
+<li>arithmeticExpression.js: This file contains a class that costructs an object for a particular arithemetic expression that is provided to it as a string. This class further contains methods that allow it to solve the particular expressions using a stack as an approach. Also, predefined variables are stored in an hashmap in order to keep track of their values, since if they appear in an arithmetic expression, they can be replaced by their value to evaluate it.<br /></li>
+<li>input.js: This file contains a class that takes an input of the complete set of arithemetic expressions that have to be evaluated and finally provide the resultant values for each variable declared within them. It does this by breaking the input format line-by-line and then further create an object using the arithmeticExpression class, for each line. It also keeps a record of the variables that are present in all the expressions, by parsing them and adding them to a hashmap.<br /></li>
+<li>variable.js: This file contains a class that allows us to create an object that stores it's name and it's value.</li>
+</ol></li>
+</ol>
+<h2 id="activity-diagram">Activity Diagram</h2>
+<p><img src="activity_diagram.png" alt="Activity Diagram" /></p>
+<h2 id="classes">Classes</h2>
+<ul>
+<li>input: This class is responsible for receiving the expressions, convert them to a list and parse them one by one.<br />```<br />params:<br /></li>
+</ul>
+<ol>
+<li>contents(String)<br /></li>
+<li>commands(Array)<br /></li>
+<li>storedVairables(Array)<br />functions:<br /></li>
+<li>constructor() - This method initilzes the input object.<br /></li>
+<li>addContents(contents) {} - This function is used to parse the input contents break the string using carriage return(splitting lines), and defining them as an array called commands.<br /></li>
+<li>addCommands() - This is a private function that is called within the addContents function in order to split the expressions, parse them, and create lhs and rhs.<br /></li>
+<li>findOutput() - This function marks the end of the input process, that receives the expressions, and starts evaluating their output.<br /></li>
+<li>getVariables(command) - This is a private function that is called by findOutput. It parses the expression provided to it, analyses the variables present in it, and refers them to the storedVariables HasMap and them by their current values.<br />```<br /></li>
+</ol>
+<ul>
+<li>arithmeticExpression: This class is responsible for evaluation of an arithemetic expression.<br />```<br />params:<br /></li>
+</ul>
+<ol>
+<li>expression(String)<br /></li>
+<li>solution(String)<br /></li>
+<li>stack(Array)<br /></li>
+<li>sign(String)<br /></li>
+<li>num(Number)<br />functions:<br /></li>
+<li>constructor() - This method initilzes the arithemticExpression object.<br /></li>
+<li>solve() - This method starts the evaluation of the arithmetic expression, using a stack. It checks for each character, if an operator is found it adds it to the stack, else it checks if the character is a digit or not.<br /></li>
+<li>isDigit(digit) - The method returns whether the character string(digit) is a numeric digit or not.<br />```<br /></li>
+</ol>
+<ul>
+<li>variable: This class is an implementation for modelling of a variable in algebra and arithemetic expressions. It stores the name and value of the variable and provides functions to update the value at any point.<br />```<br />params:<br /></li>
+</ul>
+<ol>
+<li>name(String)<br /></li>
+<li>value(String)<br />functions:<br /></li>
+<li>constructor() - This method initilies the variable object.<br /></li>
+<li>setValue(value) - This function sets the value of the particular variable. It allows updating the value at any given point in the program.<br /></li>
+<li>getValue() - This funciton returns the current value of the variable that was set.<br />```</li>
+</ol>
